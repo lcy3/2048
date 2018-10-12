@@ -1,0 +1,48 @@
+.head_row{
+	width:500px;
+	display:flex;
+	justify-content:space-between;
+}
+.newgame{
+    width: 100px;
+    background-color:#8f7a66;
+    color: #FFF;
+    font-family: Arial;
+    text-decoration: none;
+    margin: 0px ;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.newgame:hover{
+	background-color:#bdac9c;
+}
+p.score{
+	font-size:30px;
+    font-family: Arial;
+    margin: 0px ;
+}
+.da{
+	width:460px;
+	height:460px;
+	padding:20px;
+	background-color:#8f7a66;
+	margin:10px auto;
+	border-radius:10px;
+	position:relative;
+}
+.xiao{
+	width: 100px;
+	height: 100px;
+	background:#ccc0b3;
+	border-radius:6px;
+	position:absolute;
+} 
+.number{
+	border-radius:6px;
+	position:absolute;
+	background-color:red;
+	font:bold 50px Arial;
+	text-align:center;
+	line-height:100px;
+}

@@ -1,0 +1,135 @@
+<html>
+<head>
+<title>greedy snake from eev</title>
+<script>
+var x=0;
+var y=0;
+var i=0;
+var a=0;
+var b=0;
+var fooda=0;
+var foodb=0;
+var foodboolean=0;
+var lenth=4;
+var timer=0;
+var direction=39;
+var dnext=39;
+var crash=0;
+var worma=new Array();
+var wormb=new Array();
+worma[0]=10;
+wormb[0]=1;
+worma[1]=9;
+wormb[1]=1;
+worma[2]=8;
+wormb[2]=1;
+worma[3]=7;
+wormb[3]=1;
+var nexta=10;
+var nextb=1;
+function getfood()
+{if(foodboolean==0)
+ {fooda=Math.floor(Math.random()*20);
+  foodb=Math.floor(Math.random()*30);
+  foodboolean=1;
+ };
+}
+function next()
+{direction=dnext;
+ if (direction==37)
+ {fleft();}
+ else if(direction==38)
+ {fup();}
+ else if(direction==39)
+ {fright();}
+ else if(direction==40)
+ {fdown();} 
+}
+function eat()
+{lenth=lenth+1;
+ move();
+ foodboolean=0;
+}
+function eatormove()
+{if((foodboolean==1)&&(nexta==fooda)&&(nextb==foodb))
+ {eat();}
+ else
+ {move();};
+}
+function move()
+{for(i=(lenth-1);i>=1;i--)
+ {worma[i]=worma[i-1];
+  wormb[i]=wormb[i-1];
+ };
+ worma[0]=nexta;
+ wormb[0]=nextb;
+}
+function fleft()
+{if(wormb[0]>=1)
+ nextb=wormb[0]-1;
+ else
+ nextb=29;
+}
+function fright()
+{if(wormb[0]<29)
+ nextb=wormb[0]+1;
+ else
+ nextb=0;
+}
+function fup()
+{if(worma[0]>=1)
+ nexta=worma[0]-1;
+ else
+ nexta=19;
+}
+function fdown()
+{if(worma[0]<19)
+ nexta=worma[0]+1;
+ else
+ nexta=0;
+}
+function fkeydown(kd)
+{if(Math.abs(direction-kd.keyCode)!=2)
+ {dnext=kd.keyCode;};
+}
+function draw()
+{ctx.clearRect(0,0,1200,800);
+ for(i=0;i<=lenth-1;i++)
+ {x=wormb[i]*40;
+  y=worma[i]*40;
+  ctx.fillStyle="red";
+  ctx.fillRect(x,y,40,40);
+ }
+ if(foodboolean==1)
+ {ctx.fillStyle="#fff";
+  x=foodb*40;
+  y=fooda*40;
+  ctx.fillRect(x,y,40,40);
+ } 
+}
+function refresh()
+{timer=timer+1;
+ for(i=1;i<=lenth-1;i++)
+ {if ((worma[i]==worma[0])&&(wormb[i]==wormb[0]))
+  {crash=1;};
+ } 
+ if ((timer%5==1)&&crash==0)
+ {next();
+  eatormove();
+ };
+ draw(); 
+ getfood(); 
+}
+</script>
+</head>
+<body onkeydown="fkeydown(event)">
+<canvas id="canvas01" width="1200" height="800" style="background-color:#000">
+</canvas>
+<script>
+var cvs=document.getElementById("canvas01");
+var ctx=cvs.getContext("2d");
+ctx.fillStyle="red";
+var intval=setInterval("refresh();",0.00000000000000000000000001);
+</script>
+</body>
+</html>
